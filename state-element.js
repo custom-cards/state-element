@@ -2,7 +2,7 @@ class StateElement extends HTMLElement {
   set hass(hass) {
     const entityId = this.config.entity;
     const prefix_string = this.config.prefix
-    const show_empty = this.config.show_empty
+    const show_empty = this.config.show_empty || false;
     const state = hass.states[entityId].state;
     const card = document.createElement('state-element');
     if (state.length != 0) {
@@ -22,9 +22,6 @@ class StateElement extends HTMLElement {
   setConfig(config) {
     if (!config.entity) {
       throw new Error('You need to define an entity');
-    }
-    if (!config.show_empty) {
-      config.show_empty = false;
     }
     this.config = config;
   }
